@@ -5,18 +5,28 @@
 
 
 ####################################################### 1 - REALSENSE
-https://www.jetsonhacks.com/2019/12/22/install-realsense-camera-in-5-minutes-jetson-nano/
-https://github.com/JetsonHacksNano/installLibrealsense
 
-./buildLibrealsense.sh
+#https://github.com/IntelRealSense/librealsense/blob/master/doc/installation.md
+#https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_jetson.md
+
+
 
 NVCC_PATH=/usr/local/cuda/bin/nvcc
 export CUDACXX=$NVCC_PATH
 export PATH=${PATH}:/usr/local/cuda/bin
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda/lib64
 
-cmake .. -DBUILD_EXAMPLES=true -DCMAKE_BUILD_TYPE=Release -DFORCE_LIBUVC=true -DBUILD_PYTHON_BINDINGS=bool:true -DPYTHON_EXECUTABLE=$(which python3.6) -DBUILD_WITH_CUDA="$USE_CUDA" 
-makesudo make install
+cmake .. -DBUILD_EXAMPLES=true -DCMAKE_BUILD_TYPE=Release -DFORCE_LIBUVC=true -DBUILD_PYTHON_BINDINGS=bool:true -DPYTHON_EXECUTABLE=$(which python3.6) -DBUILD_WITH_CUDA="$USE_CUDA" -DCMAKE_INSTALL_PREFIX=/usr/local/
+make
+sudo make install
+
+# for RTPS
+# https://dev.intelrealsense.com/docs/open-source-ethernet-networking-for-intel-realsense-depth-cameras
+-DBUILD_NETWORK_DEVICE=ON -DFORCE_RSUSB_BACKEND=ON
+
+# avoiding pyrealsense2.pyrealsense2
+sudo mv /usr/lib/python3/dist-packages/pyrealsense2/* /usr/lib/python3/dist-packages/ & sudo rmdir /usr/lib/python3/dist-packages/pyrealsense2
+
 
 #https://github.com/IntelRealSense/librealsense/issues/7540
 #sudo make install have a wrong place for libs. Current it in dist-packages/pyrealsense2 folder, but python search in dist-packages.
@@ -66,6 +76,7 @@ mkdir build
 cd build
 
 cmake \
+    -DPREFIX=/usr/local/ \
     -DCMAKE_BUILD_TYPE=Release \
     -DBUILD_SHARED_LIBS=ON \
     -DBUILD_CUDA_MODULE=ON \
@@ -73,8 +84,9 @@ cmake \
     -DBUILD_TENSORFLOW_OPS=OFF \
     -DBUILD_PYTORCH_OPS=OFF \
     -DBUILD_UNIT_TESTS=OFF \
-    -DCMAKE_INSTALL_PREFIX=~/workspace/open3d_install \
-    -DPYTHON_EXECUTABLE=$(which python3) \
+    -DCMAKE_INSTALL_PREFIX=~/usr/local/ \
+    -DBUILD_PYTHON_BINDINGS:bool=true \
+    -DPYTHON_EXECUTABLE=$(which python3.6) \
     -DBUILD_LIBREALSENSE=ON \
     -DUSE_SYSTEM_LIBREALSENSE=ON \
     -DENABLE_HEADLESS_RENDERING=ON \
@@ -87,7 +99,7 @@ cmake \
 # Build C++ library
 make -j$(nproc)
 sudo make install
-sudo make install-pip-package
+
 
 
 ################ MOVIDIUS
