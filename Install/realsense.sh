@@ -9,14 +9,14 @@
 #https://github.com/IntelRealSense/librealsense/blob/master/doc/installation.md
 #https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_jetson.md
 
-
+git clone https://github.com/IntelRealSense/librealsense.git
 
 NVCC_PATH=/usr/local/cuda/bin/nvcc
 export CUDACXX=$NVCC_PATH
 export PATH=${PATH}:/usr/local/cuda/bin
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda/lib64
 
-cmake .. -DBUILD_EXAMPLES=true -DCMAKE_BUILD_TYPE=Release -DFORCE_LIBUVC=true -DBUILD_PYTHON_BINDINGS=bool:true -DPYTHON_EXECUTABLE=$(which python3.6) -DBUILD_WITH_CUDA="$USE_CUDA" -DCMAKE_INSTALL_PREFIX=/usr/local/
+cmake .. -DBUILD_NETWORK_DEVICE=ON -DFORCE_RSUSB_BACKEND=ON -DBUILD_EXAMPLES=true -DCMAKE_BUILD_TYPE=Release -DFORCE_LIBUVC=true -DBUILD_PYTHON_BINDINGS=bool:true -DPYTHON_EXECUTABLE=$(which python3.6) -DBUILD_WITH_CUDA="$USE_CUDA" -DCMAKE_INSTALL_PREFIX=/usr/local/
 make
 sudo make install
 
@@ -31,7 +31,7 @@ sudo mv /usr/lib/python3/dist-packages/pyrealsense2/* /usr/lib/python3/dist-pack
 #https://github.com/IntelRealSense/librealsense/issues/7540
 #sudo make install have a wrong place for libs. Current it in dist-packages/pyrealsense2 folder, but python search in dist-packages.
 #Finded workaround:
-cd /usr/lib/python3/dist-packages/pyrealsense2
+cd /usr/local/lib/python3.6/dist-packages/pyrealsense2
 sudo cp pybackend2* ..
 sudo cp pyrealsense2* ..
 
