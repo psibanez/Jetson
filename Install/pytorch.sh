@@ -18,9 +18,11 @@
 # rm torch-1.10.0a0+git36449ea-cp36-cp36m-linux_aarch64.whl
 
 
-update protobuf (3.15.5)
-sudo -H pip3 install -U protobuf
+#update protobuf (3.15.5)
 
+#torch 1.6
+#cd jetson-inference/tools
+#sudo bash install-pytorchsh
 
 #Install PyTorch 1.10 for Python 3
 #https://qengineering.eu/install-pytorch-on-jetson-nano.html
@@ -32,7 +34,7 @@ sudo apt-get upgrade
 sudo apt-get install ninja-build git cmake
 sudo apt-get install libjpeg-dev libopenmpi-dev libomp-dev ccache
 sudo apt-get install libopenblas-dev libblas-dev libeigen3-dev
-sudo pip3 install -U --user wheel mock pillow
+sudo -H pip3 install -U --user wheel mock pillow
 sudo -H pip3 install testresources
 #upgrade setuptools 47.1.1 -> 58.3.0
 sudo -H pip3 install -U setuptools

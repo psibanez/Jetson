@@ -1,15 +1,39 @@
-sudo apt install -y libssl1.0-dev
-sudo apt install -y nodejs-dev
-sudo apt install -y node-gyp
-sudo apt install -y npm
+https://qengineering.eu/install-tensorflow-2.4.0-on-jetson-nano.html
 
-###### bazel
-sudo npm install -g @bazel/bazelisk
+pip3 uninstall numpy && pip3 install numpy==1.18.5.
 
-bazel
+# get a fresh start (remember, the 64-bit OS is still under development)
+sudo apt-get update
+sudo apt-get upgrade
+# install pip and pip3
+sudo apt-get install python-pip python3-pip
+# remove old versions, if not placed in a virtual environment (let pip search for them)
+sudo pip uninstall tensorflow
+sudo pip3 uninstall tensorflow
+# install the dependencies (if not already onboard)
+sudo apt-get install gfortran
+sudo apt-get install libhdf5-dev libc-ares-dev libeigen3-dev
+sudo apt-get install libatlas-base-dev libopenblas-dev libblas-dev
+sudo apt-get install liblapack-dev
+sudo -H pip3 install Cython==0.29.21
+# install h5py with Cython version 0.29.21 (± 6 min @1950 MHz)
+sudo -H pip3 install h5py==2.10.0
+sudo -H pip3 install -U testresources numpy
+# upgrade setuptools 39.0.1 -> 53.0.0
+sudo -H pip3 install --upgrade setuptools
+sudo -H pip3 install pybind11 protobuf google-pasta
+sudo -H pip3 install -U six mock wheel requests gast
+sudo -H pip3 install keras_applications --no-deps
+sudo -H pip3 install keras_preprocessing --no-deps
+# install gdown to download from Google drive
+sudo -H pip3 install gdown
+# download the wheel
+gdown https://drive.google.com/uc?id=1DLk4Tjs8Mjg919NkDnYg02zEnbbCAzOz
+# install TensorFlow (± 12 min @1500 MHz)
+sudo -H pip3 install tensorflow-2.4.1-cp36-cp36m-linux_aarch64.whl
 
-
-############# rensorflow-rt
-# https://forums.developer.nvidia.com/t/tensorflow-no-matching-distribution/110062
-wget https://developer.download.nvidia.com/compute/redist/jp/v43/tensorflow-gpu/tensorflow_gpu-1.15.0+nv19.12-cp36-cp36m-linux_aarch64.whl
-sudo pip3 install tensorflow_gpu-1.15.0+nv19.12-cp36-cp36m-linux_aarch64.whl
+########## addon
+# download the wheel
+wget https://github.com/Qengineering/TensorFlow-Addons-Jetson-Nano/raw/main/tensorflow_addons-0.13.0.dev0-cp36-cp36m-linux_aarch64.whl
+# install the wheel
+sudo -H pip3 install tensorflow_addons-0.13.0.dev0-cp36-cp36m-linux_aarch64.whl

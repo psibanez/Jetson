@@ -11,6 +11,9 @@
 
 git clone https://github.com/IntelRealSense/librealsense.git
 
+cd ~/workspace/librealsense
+./scripts/patch-realsense-ubuntu-L4T.sh
+
 NVCC_PATH=/usr/local/cuda/bin/nvcc
 export CUDACXX=$NVCC_PATH
 export PATH=${PATH}:/usr/local/cuda/bin
@@ -24,18 +27,9 @@ sudo make install
 # https://dev.intelrealsense.com/docs/open-source-ethernet-networking-for-intel-realsense-depth-cameras
 -DBUILD_NETWORK_DEVICE=ON -DFORCE_RSUSB_BACKEND=ON
 
+#https://github.com/IntelRealSense/librealsense/issues/7540
 # avoiding pyrealsense2.pyrealsense2
 sudo mv /usr/lib/python3/dist-packages/pyrealsense2/* /usr/lib/python3/dist-packages/ & sudo rmdir /usr/lib/python3/dist-packages/pyrealsense2
-
-
-#https://github.com/IntelRealSense/librealsense/issues/7540
-#sudo make install have a wrong place for libs. Current it in dist-packages/pyrealsense2 folder, but python search in dist-packages.
-#Finded workaround:
-cd /usr/local/lib/python3.6/dist-packages/pyrealsense2
-sudo cp pybackend2* ..
-sudo cp pyrealsense2* ..
-
-
 
 
 #####################################"################ openMP for open3d
