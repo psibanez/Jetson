@@ -10,25 +10,22 @@ sudo -H pip3 install onnx
 
 #PYTORCH 1.9
 #https://qengineering.eu/install-pytorch-on-jetson-nano.html
-# get a fresh start
-sudo apt-get update
-sudo apt-get upgrade
-# the dependencies
-sudo apt-get install ninja-build git cmake
-sudo apt-get install libjpeg-dev libopenmpi-dev libomp-dev ccache
-sudo apt-get install libopenblas-dev libblas-dev libeigen3-dev
+# install the dependencies (if not already onboard)
+sudo apt-get install python3-pip libjpeg-dev libopenblas-dev libopenmpi-dev libomp-dev
+sudo -H pip3 install future
 sudo pip3 install -U --user wheel mock pillow
 sudo -H pip3 install testresources
-# upgrade setuptools 47.1.1 -> 57.0.0
-sudo -H pip3 install -U setuptools
-sudo -H pip3 install scikit-build
-# download PyTorch 1.9.0 with all its libraries
-git clone -b v1.9.0 --depth=1 --recursive https://github.com/pytorch/pytorch.git
-cd pytorch
-# one command to install several dependencies in one go
-# installs future, numpy, pyyaml, requests
-# setuptools, six, typing_extensions, dataclasses
-sudo pip3 install -r requirements.txt
+# upgrade setuptools 47.1.1 -> 57.4.0
+sudo -H pip3 install --upgrade setuptools
+sudo -H pip3 install Cython
+# install gdown to download from Google drive
+sudo -H pip3 install gdown
+# download the wheel
+gdown https://drive.google.com/uc?id=12UiREE6-o3BthhpjQxCKLtRg3u4ssPqb
+# install PyTorch 1.9.0
+sudo -H pip3 install torch-1.9.0a0+gitd69c22d-cp36-cp36m-linux_aarch64.whl
+# clean up
+rm torch-1.9.0a0+gitd69c22d-cp36-cp36m-linux_aarch64.whl
 
 
 

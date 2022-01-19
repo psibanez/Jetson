@@ -1,0 +1,72 @@
+https://github.com/killnice/yolov5-D435i
+
+yolov5-D435i
+
+This repository contains a moded version of PyTorch YOLOv5 (https://github.com/ultralytics/yolov5)
+
+Ce projet est basé sur yolov5(https://github.com/ultralytics/yolov5)
+
+Combinant la caméra de profondeur D435 et yolov5, tout en reconnaissant l'objet, il peut également mesurer la distance de l'objet par rapport à la caméra
+
+Préparation matérielle :
+
+
+image*******************
+
+Le D435i est une caméra de profondeur avec une IMU (unité de mesure inertielle, utilisant Bosch BMI055), la caméra RVB 20 mégapixels et le capteur 3D du D435i peuvent fournir des résolutions jusqu'à 1280 × 720 à 30 images par seconde, ou 90 images par seconde La vitesse fournit une résolution inférieure de 848 x 480. La caméra est un obturateur global, qui peut gérer des objets en mouvement rapide et peut être utilisée à l'intérieur et à l'extérieur. La distance de profondeur est comprise entre 0,1 m et 10 m
+
+Ordinateur win10 ou ubuntu de préférence avec carte graphique nvidia
+
+Préparation du logiciel :
+
+Utilisez pip pour installer les packages requis et entrez le répertoire du projet
+
+
+pip install -r requirements.txt
+
+pip install pyrealsense2
+
+Le programme tourne
+Cd de ligne de commande pour entrer dans le dossier du projet
+
+python main_debug.py
+
+Remarque : La première fois que vous exécutez le programme, le fichier yolov5 pt sera téléchargé depuis le cloud, environ 140 Mo+
+
+résultat courant：
+
+image
+
+About
+using yolov5 and realsense D435i
+
+Resources
+ Readme
+Stars
+ 30 stars
+Watchers
+ 1 watching
+Forks
+ 5 forks
+Releases
+No releases published
+Packages
+No packages published
+Languages
+Python
+87.4%
+ 
+Shell
+12.6%
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
